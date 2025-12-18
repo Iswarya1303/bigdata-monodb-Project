@@ -1,0 +1,258 @@
+PS C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\docker> uv run python scripts/run_pipeline.py
+C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Scripts\python.exe: can't open file 'C:\\Users\\Aishwarya\\Downloads\\bigdata-mongodb-project-main\\New folder\\bigdata-monodb-Project\\docker\\scripts\\run_pipeline.py': [Errno 2] No such file or directory
+PS C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\docker> cd ..
+PS C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project> uv run python scripts/run_pipeline.py
+2025-12-18 10:40:08 | INFO     | __main__:main - Starting MongoDB Sharded Cluster Pipeline
+2025-12-18 10:40:08 | INFO     | __main__:main - MongoDB URI: mongodb://localhost:27019
+2025-12-18 10:40:08 | INFO     | __main__:main - Database: bigdata_project
+2025-12-18 10:40:08 | INFO     | __main__:main -
+============================================================
+2025-12-18 10:40:08 | INFO     | __main__:main - STAGE 1: DATA INGESTION
+2025-12-18 10:40:08 | INFO     | __main__:main - ============================================================
+2025-12-18 10:40:08 | INFO     | src.ingestion:__init__ - Connected to MongoDB: mongodb://localhost:27019
+2025-12-18 10:40:08 | INFO     | __main__:main - Setting up sharding...
+2025-12-18 10:40:08 | INFO     | src.ingestion:setup_sharding - Sharding enabled on database: bigdata_project
+2025-12-18 10:40:09 | INFO     | src.ingestion:setup_sharding - Index created on shard key: user_id
+2025-12-18 10:40:10 | INFO     | src.ingestion:setup_sharding - Collection sharded: raw_data
+2025-12-18 10:40:10 | INFO     | src.ingestion:ingest_from_csv - Starting ingestion from: data\raw_data.csv
+2025-12-18 10:40:14 | INFO     | src.ingestion:ingest_from_csv - Loaded 1000000 rows from CSV
+2025-12-18 10:40:14 | WARNING  | src.ingestion:validate_and_chunk_data - Validation failed for row 30: 1 validation error for RawDataModel
+category
+  Input should be a valid string [type=string_type, input_value=nan, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type
+2025-12-18 10:40:14 | WARNING  | src.ingestion:validate_and_chunk_data - Validation failed for row 347: 1 validation error for RawDataModel
+category
+  Input should be a valid string [type=string_type, input_value=nan, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type
+2025-12-18 10:40:14 | WARNING  | src.ingestion:validate_and_chunk_data - Validation failed for row 453: 1 validation error for RawDataModel
+product_name
+  Input should be a valid string [type=string_type, input_value=nan, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type
+2025-12-18 10:40:14 | WARNING  | src.ingestion:validate_and_chunk_data - Validation failed for row 490: 1 validation error for RawDataModel
+product_name
+  Input should be a valid string [type=string_type, input_value=nan, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type
+2025-12-18 10:40:14 | WARNING  | src.ingestion:validate_and_chunk_data - Validation failed for row 875: 1 validation error for RawDataModel
+product_name
+  Input should be a valid string [type=string_type, input_value=nan, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type
+2025-12-18 10:40:50 | INFO     | src.ingestion:ingest_from_csv - Inserted 100000 records
+2025-12-18 10:41:19 | INFO     | src.ingestion:ingest_from_csv - Inserted 100000 records
+2025-12-18 10:41:45 | INFO     | src.ingestion:ingest_from_csv - Inserted 100000 records
+2025-12-18 10:42:20 | INFO     | src.ingestion:ingest_from_csv - Inserted 100000 records
+2025-12-18 10:42:53 | INFO     | src.ingestion:ingest_from_csv - Inserted 100000 records
+2025-12-18 10:43:31 | INFO     | src.ingestion:ingest_from_csv - Inserted 100000 records
+2025-12-18 10:44:09 | INFO     | src.ingestion:ingest_from_csv - Inserted 100000 records
+2025-12-18 10:44:58 | INFO     | src.ingestion:ingest_from_csv - Inserted 100000 records
+2025-12-18 10:46:22 | ERROR    | src.ingestion:ingest_from_csv - Ingestion failed: operation cancelled
+2025-12-18 10:46:22 | ERROR    | __main__:main - Pipeline failed: operation cancelled
+2025-12-18 10:46:22 | ERROR    | __main__:main - Full traceback:
+Traceback (most recent call last):
+
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 2765, in run
+    return self._read() if self._is_read else self._write()
+           │    │          │    │             │    └ <function _ClientConnectionRetryable._write at 0x00000204118E3920>
+           │    │          │    │             └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+           │    │          │    └ False
+           │    │          └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+           │    └ <function _ClientConnectionRetryable._read at 0x00000204118E39C0>
+           └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 2875, in _write
+    self._server = self._get_server()
+    │    │         │    └ <function _ClientConnectionRetryable._get_server at 0x00000204118E3880>
+    │    │         └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+    │    └ <Server <ServerDescription ('localhost', 27019) server_type: Unknown, rtt: None, error=NetworkTimeout('localhost:27019: timed...
+    └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 2858, in _get_server
+    return self._client._select_server(
+           │    │       └ <function MongoClient._select_server at 0x00000204118E1DA0>
+           │    └ MongoClient(host=['localhost:27019'], document_class=dict, tz_aware=False, connect=True)
+           └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 1833, in _select_server
+    server = topology.select_server(
+             │        └ <function Topology.select_server at 0x00000204118A6660>
+             └ <Topology <TopologyDescription id: 694420580e942c60dbc5e98b, topology_type: Sharded, servers: [<ServerDescription ('localhost...
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\topology.py", line 409, in select_server
+    server = self._select_server(
+             │    └ <function Topology._select_server at 0x00000204118A65C0>
+             └ <Topology <TopologyDescription id: 694420580e942c60dbc5e98b, topology_type: Sharded, servers: [<ServerDescription ('localhost...
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\topology.py", line 387, in _select_server
+    servers = self.select_servers(
+              │    └ <function Topology.select_servers at 0x00000204118A6480>
+              └ <Topology <TopologyDescription id: 694420580e942c60dbc5e98b, topology_type: Sharded, servers: [<ServerDescription ('localhost...
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\topology.py", line 294, in select_servers
+    server_descriptions = self._select_servers_loop(
+                          │    └ <function Topology._select_servers_loop at 0x00000204118A6520>
+                          └ <Topology <TopologyDescription id: 694420580e942c60dbc5e98b, topology_type: Sharded, servers: [<ServerDescription ('localhost...
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\topology.py", line 344, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+          └ <class 'pymongo.errors.ServerSelectionTimeoutError'>
+
+pymongo.errors.ServerSelectionTimeoutError: localhost:27019: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 694420580e942c60dbc5e98b, topology_type: Sharded, servers: [<ServerDescription ('localhost', 27019) server_type: Unknown, rtt: None, error=NetworkTimeout('localhost:27019: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\scripts\run_pipeline.py", line 157, in <module>
+    main()
+    └ <function main at 0x000002047ED7E700>
+
+> File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\scripts\run_pipeline.py", line 73, in main
+    ingestion_metrics = ingestion.ingest_from_csv(data_file)
+                        │         │               └ WindowsPath('data/raw_data.csv')
+                        │         └ <function DataIngestion.ingest_from_csv at 0x00000204118E3EC0>
+                        └ <src.ingestion.DataIngestion object at 0x000002047ED5DE80>
+
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\src\ingestion.py", line 114, in ingest_from_csv
+    result = self.collection.insert_many(chunk, ordered=False)
+             │    │          │           └ [{'user_id': 23202, 'order_id': 'ORD-00802677', 'product_id': 'PROD-03378', 'product_name': 'Lamp', 'category': 'Furniture', ...
+             │    │          └ <function Collection.insert_many at 0x00000204118F1300>
+             │    └ Collection(Database(MongoClient(host=['localhost:27019'], document_class=dict, tz_aware=False, connect=True), 'bigdata_projec...
+             └ <src.ingestion.DataIngestion object at 0x000002047ED5DE80>
+
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\_csot.py", line 125, in csot_wrapper
+    return func(self, *args, **kwargs)
+           │    │      │       └ {'ordered': False}
+           │    │      └ ([{'user_id': 23202, 'order_id': 'ORD-00802677', 'product_id': 'PROD-03378', 'product_name': 'Lamp', 'category': 'Furniture',...
+           │    └ Collection(Database(MongoClient(host=['localhost:27019'], document_class=dict, tz_aware=False, connect=True), 'bigdata_projec...
+           └ <function Collection.insert_many at 0x00000204118F1260>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\collection.py", line 975, in insert_many
+    blk.execute(write_concern, session, _Op.INSERT)
+    │   │       │              │        │   └ <_Op.INSERT: 'insert'>
+    │   │       │              │        └ <enum '_Op'>
+    │   │       │              └ None
+    │   │       └ WriteConcern()
+    │   └ <function _Bulk.execute at 0x000002041187D940>
+    └ <pymongo.synchronous.bulk._Bulk object at 0x00000204119E8450>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\bulk.py", line 751, in execute
+    return self.execute_command(generator, write_concern, session, operation)
+           │    │               │          │              │        └ <_Op.INSERT: 'insert'>
+           │    │               │          │              └ None
+           │    │               │          └ WriteConcern()
+           │    │               └ <generator object _Bulk.gen_unordered at 0x00000204119E8640>
+           │    └ <function _Bulk.execute_command at 0x000002041187D6C0>
+           └ <pymongo.synchronous.bulk._Bulk object at 0x00000204119E8450>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\bulk.py", line 604, in execute_command
+    _ = client._retryable_write(
+        │      └ <function MongoClient._retryable_write at 0x00000204118E2480>
+        └ MongoClient(host=['localhost:27019'], document_class=dict, tz_aware=False, connect=True)
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 2082, in _retryable_write
+    return self._retry_with_session(retryable, func, s, bulk, operation, operation_id)
+           │    │                   │          │     │  │     │          └ -1189727932
+           │    │                   │          │     │  │     └ <_Op.INSERT: 'insert'>
+           │    │                   │          │     │  └ <pymongo.synchronous.bulk._Bulk object at 0x00000204119E8450>
+           │    │                   │          │     └ <pymongo.synchronous.client_session.ClientSession object at 0x000002041188BC50>
+           │    │                   │          └ <function _Bulk.execute_command.<locals>.retryable_bulk at 0x0000020411957BA0>
+           │    │                   └ True
+           │    └ <function MongoClient._retry_with_session at 0x00000204118E2200>
+           └ MongoClient(host=['localhost:27019'], document_class=dict, tz_aware=False, connect=True)
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 1968, in _retry_with_session
+    return self._retry_internal(
+           │    └ <function MongoClient._retry_internal at 0x00000204118E2340>
+           └ MongoClient(host=['localhost:27019'], document_class=dict, tz_aware=False, connect=True)
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\_csot.py", line 125, in csot_wrapper
+    return func(self, *args, **kwargs)
+           │    │      │       └ {'func': <function _Bulk.execute_command.<locals>.retryable_bulk at 0x0000020411957BA0>, 'session': <pymongo.synchronous.clie...
+           │    │      └ ()
+           │    └ MongoClient(host=['localhost:27019'], document_class=dict, tz_aware=False, connect=True)
+           └ <function MongoClient._retry_internal at 0x00000204118E22A0>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 2014, in _retry_internal
+    ).run()
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 2770, in run
+    self._check_last_error()
+    │    └ <function _ClientConnectionRetryable._check_last_error at 0x00000204118E37E0>
+    └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 2851, in _check_last_error
+    raise self._last_error
+          │    └ _OperationCancelled('operation cancelled')
+          └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 2765, in run
+    return self._read() if self._is_read else self._write()
+           │    │          │    │             │    └ <function _ClientConnectionRetryable._write at 0x00000204118E3920>
+           │    │          │    │             └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+           │    │          │    └ False
+           │    │          └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+           │    └ <function _ClientConnectionRetryable._read at 0x00000204118E39C0>
+           └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\mongo_client.py", line 2897, in _write
+    return self._func(self._session, conn, self._retryable)  # type: ignore
+           │    │     │    │         │     │    └ True
+           │    │     │    │         │     └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+           │    │     │    │         └ Connection(<pymongo.network_layer.NetworkingInterface object at 0x0000020411961450>) CLOSED at 2216498173328
+           │    │     │    └ <pymongo.synchronous.client_session.ClientSession object at 0x000002041188BC50>
+           │    │     └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+           │    └ <function _Bulk.execute_command.<locals>.retryable_bulk at 0x0000020411957BA0>
+           └ <pymongo.synchronous.mongo_client._ClientConnectionRetryable object at 0x00000204119E8750>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\bulk.py", line 593, in retryable_bulk
+    self._execute_command(
+    │    └ <function _Bulk._execute_command at 0x000002041187D620>
+    └ <pymongo.synchronous.bulk._Bulk object at 0x00000204119E8450>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\bulk.py", line 538, in _execute_command
+    result, to_send = self._execute_batch(bwc, cmd, ops, client)
+                      │    │              │    │    │    └ MongoClient(host=['localhost:27019'], document_class=dict, tz_aware=False, connect=True)
+                      │    │              │    │    └ <itertools.islice object at 0x0000020411890680>
+                      │    │              │    └ {'insert': 'raw_data', 'ordered': False, 'lsid': {'id': Binary(b'\xe5h,\xe4\xf2\x15FD\x98\x16v)\xf6\xcf-[', 4)}, 'txnNumber':...
+                      │    │              └ <pymongo.message._BulkWriteContext object at 0x0000020411315540>
+                      │    └ <function _Bulk._execute_batch at 0x000002041187D580>
+                      └ <pymongo.synchronous.bulk._Bulk object at 0x00000204119E8450>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\bulk.py", line 462, in _execute_batch
+    result = self.write_command(bwc, cmd, request_id, msg, to_send, client)  # type: ignore[arg-type]
+             │    │             │    │    │           │    │        └ MongoClient(host=['localhost:27019'], document_class=dict, tz_aware=False, connect=True)
+             │    │             │    │    │           │    └ [{'user_id': 23202, 'order_id': 'ORD-00802677', 'product_id': 'PROD-03378', 'product_name': 'Lamp', 'category': 'Furniture', ...
+             │    │             │    │    │           └ b'\x9d\x81J\x01\xf1Z\x00\x00\x00\x00\x00\x00\xdd\x07\x00\x00\x00\x00\x00\x00\x00\xda\x00\x00\x00\x02insert\x00\t\x00\x00\x00r...
+             │    │             │    │    └ 23281
+             │    │             │    └ {'insert': 'raw_data', 'ordered': False, 'lsid': {'id': Binary(b'\xe5h,\xe4\xf2\x15FD\x98\x16v)\xf6\xcf-[', 4)}, 'txnNumber':...
+             │    │             └ <pymongo.message._BulkWriteContext object at 0x0000020411315540>
+             │    └ <function _handle_reauth.<locals>.inner at 0x000002041187D3A0>
+             └ <pymongo.synchronous.bulk._Bulk object at 0x00000204119E8450>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\helpers.py", line 47, in inner
+    return func(*args, **kwargs)
+           │     │       └ {}
+           │     └ (<pymongo.synchronous.bulk._Bulk object at 0x00000204119E8450>, <pymongo.message._BulkWriteContext object at 0x00000204113155...
+           └ <function _Bulk.write_command at 0x000002041187D300>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\bulk.py", line 274, in write_command
+    reply = bwc.conn.write_command(request_id, msg, bwc.codec)  # type: ignore[misc]
+            │   │                  │           │    │   └ <member 'codec' of '_BulkWriteContextBase' objects>
+            │   │                  │           │    └ <pymongo.message._BulkWriteContext object at 0x0000020411315540>
+            │   │                  │           └ b'\x9d\x81J\x01\xf1Z\x00\x00\x00\x00\x00\x00\xdd\x07\x00\x00\x00\x00\x00\x00\x00\xda\x00\x00\x00\x02insert\x00\t\x00\x00\x00r...
+            │   │                  └ 23281
+            │   └ <member 'conn' of '_BulkWriteContextBase' objects>
+            └ <pymongo.message._BulkWriteContext object at 0x0000020411315540>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\pool.py", line 501, in write_command
+    reply = self.receive_message(request_id)
+            │    │               └ 23281
+            │    └ <function Connection.receive_message at 0x00000204118668E0>
+            └ Connection(<pymongo.network_layer.NetworkingInterface object at 0x0000020411961450>) CLOSED at 2216498173328
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\pool.py", line 469, in receive_message
+    self._raise_connection_failure(error)
+    │    └ <function Connection._raise_connection_failure at 0x00000204118671A0>
+    └ Connection(<pymongo.network_layer.NetworkingInterface object at 0x0000020411961450>) CLOSED at 2216498173328
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\synchronous\pool.py", line 466, in receive_message
+    return receive_message(self, request_id, self.max_message_size)
+           │               │     │           │    └ 48000000
+           │               │     │           └ Connection(<pymongo.network_layer.NetworkingInterface object at 0x0000020411961450>) CLOSED at 2216498173328
+           │               │     └ 23281
+           │               └ Connection(<pymongo.network_layer.NetworkingInterface object at 0x0000020411961450>) CLOSED at 2216498173328
+           └ <function receive_message at 0x000002041167C220>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\network_layer.py", line 759, in receive_message
+    length, _, response_to, op_code = _UNPACK_HEADER(receive_data(conn, 16, deadline))
+                                      │              │            │         └ None
+                                      │              │            └ Connection(<pymongo.network_layer.NetworkingInterface object at 0x0000020411961450>) CLOSED at 2216498173328
+                                      │              └ <function receive_data at 0x0000020411696840>
+                                      └ <built-in method unpack of _struct.Struct object at 0x00000204116C9E40>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\network_layer.py", line 343, in receive_data
+    wait_for_read(conn, deadline)
+    │             │     └ None
+    │             └ Connection(<pymongo.network_layer.NetworkingInterface object at 0x0000020411961450>) CLOSED at 2216498173328
+    └ <function wait_for_read at 0x00000204116967A0>
+  File "C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project\.venv\Lib\site-packages\pymongo\network_layer.py", line 318, in wait_for_read
+    raise _OperationCancelled("operation cancelled")
+          └ <class 'pymongo.errors._OperationCancelled'>
+
+pymongo.errors._OperationCancelled: operation cancelled
+PS C:\Users\Aishwarya\Downloads\bigdata-mongodb-project-main\New folder\bigdata-monodb-Project>
+
+
