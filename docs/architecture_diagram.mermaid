@@ -1,0 +1,110 @@
+graph TB
+    subgraph "Client Layer"
+        APP[Python Application]
+        DASH[Streamlit Dashboard]
+    end
+    
+    subgraph "Query Routing Layer"
+        MONGOS1[Mongos Router 1<br/>:27017]
+        MONGOS2[Mongos Router 2<br/>:27018]
+    end
+    
+    subgraph "Config Servers"
+        CONFIG1[Config Server 1]
+        CONFIG2[Config Server 2]
+        CONFIG3[Config Server 3]
+        CONFIG1 -.RS Sync.-> CONFIG2
+        CONFIG2 -.RS Sync.-> CONFIG3
+        CONFIG3 -.RS Sync.-> CONFIG1
+    end
+    
+    subgraph "Shard 1 - Replica Set"
+        S1P[Primary]
+        S1S1[Secondary 1]
+        S1S2[Secondary 2]
+        S1P -.Replication.-> S1S1
+        S1P -.Replication.-> S1S2
+    end
+    
+    subgraph "Shard 2 - Replica Set"
+        S2P[Primary]
+        S2S1[Secondary 1]
+        S2S2[Secondary 2]
+        S2P -.Replication.-> S2S1
+        S2P -.Replication.-> S2S2
+    end
+    
+    subgraph "Shard 3 - Replica Set"
+        S3P[Primary]
+        S3S1[Secondary 1]
+        S3S2[Secondary 2]
+        S3P -.Replication.-> S3S1
+        S3P -.Replication.-> S3S2
+    end
+    
+    subgraph "Processing Layer"
+        PYSPARK[PySpark Engine]
+        INGEST[Ingestion Module]
+        CLEAN[Cleaning Module]
+        AGG[Aggregation Module]
+        INGEST --> CLEAN
+        CLEAN --> AGG
+        PYSPARK --> INGEST
+        PYSPARK --> CLEAN
+        PYSPARK --> AGG
+    end
+    
+    subgraph "Data Layers"
+        RAW[(Raw Data<br/>750K+ rows)]
+        CLEANED[(Cleaned Data)]
+        AGGREGATED[(Aggregated Data)]
+        RAW --> CLEANED
+        CLEANED --> AGGREGATED
+    end
+    
+    APP --> MONGOS1
+    APP --> MONGOS2
+    DASH --> MONGOS1
+    
+    MONGOS1 --> CONFIG1
+    MONGOS2 --> CONFIG1
+    
+    MONGOS1 --> S1P
+    MONGOS1 --> S2P
+    MONGOS1 --> S3P
+    MONGOS2 --> S1P
+    MONGOS2 --> S2P
+    MONGOS2 --> S3P
+    
+    PYSPARK --> MONGOS1
+    
+    S1P -.Stores.-> RAW
+    S2P -.Stores.-> RAW
+    S3P -.Stores.-> RAW
+    
+    S1P -.Stores.-> CLEANED
+    S2P -.Stores.-> CLEANED
+    S3P -.Stores.-> CLEANED
+    
+    S1P -.Stores.-> AGGREGATED
+    S2P -.Stores.-> AGGREGATED
+    S3P -.Stores.-> AGGREGATED
+    
+    style MONGOS1 fill:#4A90E2
+    style MONGOS2 fill:#4A90E2
+    style CONFIG1 fill:#F39C12
+    style CONFIG2 fill:#F39C12
+    style CONFIG3 fill:#F39C12
+    style S1P fill:#27AE60
+    style S2P fill:#27AE60
+    style S3P fill:#27AE60
+    style S1S1 fill:#52BE80
+    style S1S2 fill:#52BE80
+    style S2S1 fill:#52BE80
+    style S2S2 fill:#52BE80
+    style S3S1 fill:#52BE80
+    style S3S2 fill:#52BE80
+    style PYSPARK fill:#E74C3C
+    style RAW fill:#9B59B6
+    style CLEANED fill:#3498DB
+    style AGGREGATED fill:#1ABC9C

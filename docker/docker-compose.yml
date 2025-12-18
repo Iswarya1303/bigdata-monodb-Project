@@ -1,0 +1,171 @@
+services:
+  # ==================== CONFIG SERVERS ====================
+  config1:
+    image: mongo:7.0
+    container_name: config1
+    command: mongod --configsvr --replSet configrs --port 27017 --dbpath /data/db
+    volumes:
+      - config1_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  config2:
+    image: mongo:7.0
+    container_name: config2
+    command: mongod --configsvr --replSet configrs --port 27017 --dbpath /data/db
+    volumes:
+      - config2_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  config3:
+    image: mongo:7.0
+    container_name: config3
+    command: mongod --configsvr --replSet configrs --port 27017 --dbpath /data/db
+    volumes:
+      - config3_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  # ==================== SHARD 1 REPLICA SET ====================
+  shard1-primary:
+    image: mongo:7.0
+    container_name: shard1-primary
+    command: mongod --shardsvr --replSet shard1rs --port 27017 --dbpath /data/db
+    volumes:
+      - shard1_primary_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  shard1-secondary1:
+    image: mongo:7.0
+    container_name: shard1-secondary1
+    command: mongod --shardsvr --replSet shard1rs --port 27017 --dbpath /data/db
+    volumes:
+      - shard1_secondary1_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  shard1-secondary2:
+    image: mongo:7.0
+    container_name: shard1-secondary2
+    command: mongod --shardsvr --replSet shard1rs --port 27017 --dbpath /data/db
+    volumes:
+      - shard1_secondary2_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  # ==================== SHARD 2 REPLICA SET ====================
+  shard2-primary:
+    image: mongo:7.0
+    container_name: shard2-primary
+    command: mongod --shardsvr --replSet shard2rs --port 27017 --dbpath /data/db
+    volumes:
+      - shard2_primary_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  shard2-secondary1:
+    image: mongo:7.0
+    container_name: shard2-secondary1
+    command: mongod --shardsvr --replSet shard2rs --port 27017 --dbpath /data/db
+    volumes:
+      - shard2_secondary1_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  shard2-secondary2:
+    image: mongo:7.0
+    container_name: shard2-secondary2
+    command: mongod --shardsvr --replSet shard2rs --port 27017 --dbpath /data/db
+    volumes:
+      - shard2_secondary2_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  # ==================== SHARD 3 REPLICA SET ====================
+  shard3-primary:
+    image: mongo:7.0
+    container_name: shard3-primary
+    command: mongod --shardsvr --replSet shard3rs --port 27017 --dbpath /data/db
+    volumes:
+      - shard3_primary_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  shard3-secondary1:
+    image: mongo:7.0
+    container_name: shard3-secondary1
+    command: mongod --shardsvr --replSet shard3rs --port 27017 --dbpath /data/db
+    volumes:
+      - shard3_secondary1_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  shard3-secondary2:
+    image: mongo:7.0
+    container_name: shard3-secondary2
+    command: mongod --shardsvr --replSet shard3rs --port 27017 --dbpath /data/db
+    volumes:
+      - shard3_secondary2_data:/data/db
+    networks:
+      - mongo-cluster
+    restart: unless-stopped
+
+  # ==================== MONGOS ROUTERS ====================
+  mongos1:
+    image: mongo:7.0
+    container_name: mongos1
+    command: mongos --configdb configrs/config1:27017,config2:27017,config3:27017 --bind_ip_all --port 27017
+    ports:
+      - "27019:27017"
+    networks:
+      - mongo-cluster
+    depends_on:
+      - config1
+      - config2
+      - config3
+    restart: unless-stopped
+
+  mongos2:
+    image: mongo:7.0
+    container_name: mongos2
+    command: mongos --configdb configrs/config1:27017,config2:27017,config3:27017 --bind_ip_all --port 27017
+    ports:
+      - "27020:27017"
+    networks:
+      - mongo-cluster
+    depends_on:
+      - config1
+      - config2
+      - config3
+    restart: unless-stopped
+
+networks:
+  mongo-cluster:
+    driver: bridge
+
+volumes:
+  config1_data:
+  config2_data:
+  config3_data:
+  shard1_primary_data:
+  shard1_secondary1_data:
+  shard1_secondary2_data:
+  shard2_primary_data:
+  shard2_secondary1_data:
+  shard2_secondary2_data:
+  shard3_primary_data:
+  shard3_secondary1_data:
+  shard3_secondary2_data:
