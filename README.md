@@ -383,9 +383,3 @@ MIT License - see LICENSE file
 
 https://youtu.be/dNdDpqcVxsg
 
-
-## Support
-
-For issues or questions:
-- Open GitHub issue
-- Contact: your-email@example.com
